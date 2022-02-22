@@ -1,4 +1,5 @@
 using aws_test.Database;
+using aws_test.Error;
 using aws_test.Startup;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -15,7 +16,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<CadastroContext>();
-new DependencyInjectionConfigurator(builder.Services).Configure();
+
+new List<IConfigurator>()
+{
+    new DependencyInjectionConfigurator(builder.Services),
+    new LogConfigurator(builder.Services)
+}.ForEach(config => config.Configure());
 
 var app = builder.Build();
 
@@ -27,9 +33,7 @@ if (app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
-
 app.UseAuthorization();
-
+app.UseMiddleware<GlobalErrorHandler>();
 app.MapControllers();
-
 app.Run();

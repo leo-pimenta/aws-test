@@ -5,7 +5,7 @@ using aws_test.Service;
 
 namespace aws_test.Startup
 {
-    public class DependencyInjectionConfigurator
+    public class DependencyInjectionConfigurator : IConfigurator
     {
         private readonly IServiceCollection Services;
 
