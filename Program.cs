@@ -25,6 +25,10 @@ new List<IConfigurator>()
 
 var app = builder.Build();
 
+IServiceProvider serviceProvider = builder.Services.BuildServiceProvider();
+var log = serviceProvider.GetService<Serilog.ILogger>();
+log.Information($"Environment: {app.Environment.EnvironmentName}");
+
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
