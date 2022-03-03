@@ -4,11 +4,11 @@ namespace aws_test.Dto
 {
     public class CadastroDto
     {
-        [Required(ErrorMessage = "\"Nome\" é um campo obrigatório.")]
+        [Required(ErrorMessage = "Field \"Name\" is required.")]
         public string Nome { get; set; }
 
-        [Required(ErrorMessage = "\"Idade\" é um campo obrigatório.")]
-        [Range(18, 120, ErrorMessage = "\"Idade\" deve ser maior que 18 e menor que 120 anos.")]
+        [Required(ErrorMessage = "Field \"Age\" is required.")]
+        [Range(18, 120, ErrorMessage = "Field \"Age\" must be greater than 18 and less than 120 years.")]
         public int Idade { get; set; }
 
         public CadastroDto(string nome, int idade)
